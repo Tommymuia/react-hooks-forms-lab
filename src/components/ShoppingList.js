@@ -1,23 +1,35 @@
 import React, { useState } from "react";
+import ItemForm from "./ItemForm";
+import Filter from "./Filter";
+import { v4 as uuid } from "uuid";
 
 function ShoppingList({ items }) {
   const [search, setSearch] = useState("");
+  const [itemList, setItemList] = useState(items || []);
 
-  const filteredItems = items.filter((item) =>
+  // Filter items based on search term
+  const itemsToDisplay = itemList.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  function handleSearchChange(e) {
+    setSearch(e.target.value);
+  }
+
+  function handleItemFormSubmit(newItem) {
+    setItemList([...itemList, newItem]);
+  }
+
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+    <div className="ShoppingList">
+      <ItemForm onItemFormSubmit={handleItemFormSubmit} />
+      <Filter search={search} onSearchChange={handleSearchChange} />
+
       <ul className="Items">
-        {filteredItems.map((item, index) => (
-          <li key={index}>{item.name}</li>
+        {itemsToDisplay.map((item) => (
+          <li key={item.id} className="Item">
+            <span>{item.name}</span> <span>{item.category}</span>
+          </li>
         ))}
       </ul>
     </div>

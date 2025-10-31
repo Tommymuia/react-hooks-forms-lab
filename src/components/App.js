@@ -1,18 +1,21 @@
 import React from "react";
-import ShoppingList from "./components/ShoppingList";
+import ShoppingList from "./ShoppingList"; // ✅ FIXED IMPORT
+import { v4 as uuid } from "uuid";
 
-const testData = [
-  { name: "Yogurt", category: "Dairy" },
-  { name: "Cheese", category: "Dairy" },
-  { name: "Apple", category: "Produce" },
-  { name: "Cake", category: "Dessert" },
+const initialItems = [
+  { id: uuid(), name: "Lettuce", category: "Produce" },
+  { id: uuid(), name: "Yogurt", category: "Dairy" },
+  { id: uuid(), name: "Swiss Cheese", category: "Dairy" },
+  { id: uuid(), name: "String Cheese", category: "Dairy" },
 ];
 
-export default function App() {
+function App() {
   return (
     <div className="App">
       <h1>Shopping List</h1>
-      <ShoppingList items={testData} />
+      <ShoppingList items={initialItems} />
     </div>
   );
 }
+
+export default App;

@@ -1,20 +1,16 @@
 import React from "react";
 
-export default function Filter({ search, onSearchChange, onCategoryChange }) {
+function Filter({ search, onSearchChange }) {
   return (
     <div className="Filter">
       <input
         type="text"
         placeholder="Search..."
         value={search}
-        onChange={(e) => onSearchChange(e.target.value)}
+        onChange={onSearchChange}
       />
-      <select onChange={(e) => onCategoryChange(e.target.value)}>
-        <option value="All">All</option>
-        <option value="Produce">Produce</option>
-        <option value="Dairy">Dairy</option>
-        <option value="Dessert">Dessert</option>
-      </select>
     </div>
   );
 }
+
+export default Filter;
